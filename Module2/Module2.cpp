@@ -10,7 +10,6 @@ using namespace std;
 void login();
 void registration();
 
-
 int main()
 {
    int number;
@@ -34,58 +33,58 @@ int main()
    cout << endl;
 
    //input from user
-   switch(number)
+   switch (number)
    {
-      case 1:
-         login();
-         break;
-      case 2:
-         registration();
-         break;
-      case 3:
-         cout <<"\t\t\t thank you! \n\n";
-         break;
-      default:
-         system("cls");
-         cout << "\t\t\t your selections is not valid, please select one of the abotiosn above.\n" << endl;
-         main();
+   case 1:
+      login();
+      break;
+   case 2:
+      registration();
+      break;
+   case 3:
+      cout << "\t\t\t thank you! \n\n";
+      break;
+   default:
+      system("cls");
+      cout << "\t\t\t your selections is not valid, please select one of the abotiosn above.\n" << endl;
+      main();
    }
 }
+
 
 //Here we will write to our .txt file.
 //this will allow us to create a login, that can latter be used by pressing "1" on the maine menue
 void registration()
 {
-   string RuserId, Rpassword, Rid, Rpass;
+   string RuserId, Rpassword, RID, Rpass;
    system("cls");
    cout << "\t\t\t Enter Username : ";
    cin >> RuserId;
    cout << "\t\t\t password ";
    cin >> Rpassword;
 
-   ofstream f1("credentials.txt", ios::app);      //append credentials
+   ofstream f1("records.txt", ios::app);      //append credentials
    f1 << RuserId << '  ' << Rpassword << endl;
    system("cls");
    cout << "\t\t\t succesful registration";
    main();
 }
 
-
 void login()
 {
    int count{};                                   //count
-   string user, pass, u, p;             //variables
+   string Username, Password, user, code;             //variables
    system("cls");                                 //clear
    cout << "\t\t\t Enter credentials : " << endl; //display
-   cout << "\t\t\t email ";
-   cin >> user;                                 //input
+   cout << "\t\t\t Username ";
+   cin >> Username;                                 //input
    cout << "\t\t\t Password ";
-   cin >> pass;
+   cin >> Password;
 
-   ifstream input("database.txt");
-   while (input >> u >> p)
+   ifstream input("records.txt");
+   while (input >> user >> code)
    {
-      if (u == user && p == pass)
+      if (user == Username && code == Password) //if the correct credentials were entered
 
       {
          count = 1;
@@ -95,14 +94,12 @@ void login()
    input.close();
    if (count == 1)
    {
-      cout << "\nHello" << user << "\nLOGIN SUCESS\nWe're glad that you're here.\nThanks for logging in\n";
-      cin.get();
-      cin.get();
+      cout << Username << "\n successful login!";
       main();
    }
    else
    {
-      cout << "\nLOGIN ERROR\nPlease check your username and password\n";
+      cout << "\n wrong ID or password";
       main();
    }
 }
